@@ -1,0 +1,71 @@
+@font-face {
+    font-family: comics;
+    src: url(fonts/Boom\ Comic\ Font.otf);
+}
+
+* {
+    font-family: comics;
+    color: white !important;
+    letter-spacing: 0.2em;
+}
+
+body::-webkit-scrollbar {
+    width: 12px;
+    /* width of the entire scrollbar */
+}
+
+body::-webkit-scrollbar-track {
+    background: grey;
+    /* color of the tracking area */
+}
+
+body::-webkit-scrollbar-thumb {
+    background-color: blue;
+    /* color of the scroll thumb */
+    border-radius: 20px;
+    /* roundness of the scroll thumb */
+    border: 3px solid orange;
+    /* creates padding around scroll thumb */
+}
+
+.arial {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.hide {
+    display: none;
+}
+
+select {
+    width: 40%;
+    letter-spacing: normal;
+}
+
+.smooth-transition {
+    transition: 1s ease;
+}
+
+@keyframes fade {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.animation {
+    animation: fade 1s linear;
+}
+
+.custom-select {
+
+    overflow: hidden;
+}
+
+custom-select.open {
+    max-height: 200px;
+    /* Hauteur souhaitée pour la liste déroulante */
+    transition: max-height 1s ease-out;
+}
