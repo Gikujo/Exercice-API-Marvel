@@ -1,0 +1,30 @@
+h1 {
+    animation: text-apparition 1s linear;
+    width: 40%;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    transform: translate(-50%, 0);
+    text-align: justify;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.space-div {
+    width: 3vw;
+}
+
+@keyframes text-apparition {
+
+    0% {
+        width: 100%;
+        opacity: 0.2;
+    }
+
+    100% {
+        width: 40%;
+        opacity: 1;
+    }
+
+}

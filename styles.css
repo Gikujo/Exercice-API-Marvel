@@ -5,7 +5,6 @@
 
 * {
     font-family: comics;
-    color: white !important;
     letter-spacing: 0.2em;
 }
 
@@ -59,13 +58,9 @@ select {
     animation: fade 1s linear;
 }
 
-.custom-select {
-
-    overflow: hidden;
-}
-
-custom-select.open {
-    max-height: 200px;
-    /* Hauteur souhaitée pour la liste déroulante */
-    transition: max-height 1s ease-out;
+.choix-couleur {
+    position: absolute !important;
+    left: 5%;
+    height: 60px;
+    width: 15vw;
 }

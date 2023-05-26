@@ -2,10 +2,12 @@ const container = document.querySelector('#container'); // Obtient un élément 
 const activeCharacter = document.querySelector('#active-character');
 let characters = [];
 
-// fetch(`http://gateway.marvel.com/v1/public/characters?ts=1&apikey=801a4c2ace85cb0249e88ae5fc8f04f7&hash=ef42a35292d209445ba7ab7141705c57`)
-//     .then((response) => response.json())
-//     .then((result) => createHtml(result));
+// --------------- FETCH DE l'API -------------------
 
+// la ligne ci-dessous renvoie à l'API obtenue depuis mon compte
+// fetch(`http://gateway.marvel.com/v1/public/characters?ts=1&apikey=801a4c2ace85cb0249e88ae5fc8f04f7&hash=ef42a35292d209445ba7ab7141705c57`)
+
+// la ligne ci-dessous renvoie à l'API depuis le compte de Sofiane
 fetch(`https://gateway.marvel.com/v1/public/characters?limit=100&ts=1&apikey=15328c79dbac5e06a3f67c7fc8380289&hash=1cb4e898f70ee7f5eda4717d22721077`)
     .then((response) => response.json())
     .then((result) => createHtml(result));
@@ -14,36 +16,41 @@ fetch(`https://gateway.marvel.com/v1/public/characters?limit=100&ts=1&apikey=153
 function createHtml(result) {
 
     characters = result.data.results;
-    let i = 0; // J'initialise la variable qui va donner les numéros d'options de la liste
-    let html = ''; // Initialise la variable HTML vide
-
+    let i = 0;
+    let html = '';
 
     // Parcourt tous les résultats et construit le HTML avec les données
     characters.forEach(character => {
-
-
         if (character.thumbnail.path.includes("image_not_available") || !character.description) {
             console.log("oui");
             i++;
         } else {
             console.log("non");
-            html += `<option value="${i}" class="arial">${character.name}</option>`;
+            html += `<li value="${i}" class="arial" onclick="updateCharacter(this.value)"><a>${character.name}</a></li>`;
             i++;
         }
-
     });
 
     container.innerHTML += html; // Met à jour le contenu HTML de l'élément de conteneur avec le HTML créé
 }
 
+// --------------- RAJOUT DU PERSONNAGE SÉLECTIONNÉ, APPELÉ SUR LE "ONCLICK" -------------------
+
 function updateCharacter(selectedIndex) {
 
+    if (themeIsBlack == true) {
+        const elements = document.getElementsByClassName('changing-color');
+        const textColor = Array.from(elements);
+        textColor.forEach(element => {
+            element.classList.add("text-white");
+        });
+    }
     const selectedCharacter = characters[selectedIndex];
 
 
     const html = `
-        <h1>${selectedCharacter.name}</h1>
-        <p class="my-3">${selectedCharacter.description}</p>
+        <h2 class="changing-color text-white">${selectedCharacter.name}</h2>
+        <p class="my-3 changing-color text-${color}">${selectedCharacter.description}</p>
         <img class="w-100"src="${selectedCharacter.thumbnail.path}.${selectedCharacter.thumbnail.extension}" alt="${selectedCharacter.name}">
     `;
     activeCharacter.classList.remove("d-none");
@@ -55,15 +62,10 @@ function updateCharacter(selectedIndex) {
     setTimeout(() => {
         activeCharacter.classList.remove("animation");
     }, 1100);
-
-
 }
 
-activeCharacter.addEventListener("double-click", function () {
-    alert("Cliqué !");
-});
+// --------------- GESTION DES BORDURES LORS DU CHARGEMENT DE LA PAGE -------------------
 
-// Effacer les bordures du carré de personnage lorsque l'option sélectionnée est celle par défaut :
 container.addEventListener("change", function () {
     if (container.value === "selected") {
         activeCharacter.classList.add("hide");
@@ -73,3 +75,4 @@ container.addEventListener("change", function () {
         activeCharacter.classList.remove("hide");
     }
 });
+
