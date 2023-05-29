@@ -1,114 +1,115 @@
-// --------------- GESTION DES DIFFÉRENTS THÈMES DE COULEUR -------------------
-const bodyEl = document.querySelector('body');
-const elements = document.getElementsByClassName('changing-color');
-const textColor = Array.from(elements);
+/* -------------------------------------------------------------------------------------------------
+-------------------------- GESTION DES DIFFÉRENTS THÈMES DE COULEUR --------------------------------
+--------------------------------------------------------------------------------------------------*/
 
-console.log(`textColor : ${textColor.length}`);
-console.log(bodyEl);
+const bodyEl = document.querySelector('body');
+let textColor = "white";
+let backgroundColor = "black"
+
+
+
+// ------------------------- COULEUR PAR DEFAUT : NOIR -------------------------------------
+const textElements = document.getElementsByClassName('changing-color');
+for (let index = 0; index < textElements.length; index++) {
+    textElements[index].classList.add(`text-${textColor}`);
+}
 
 let themeIsBlack = true;
 let themeIsGreen = false;
 let themeIsRed = false;
-let color = "white";
 
-if (themeIsBlack == true) {
-    bodyEl.classList.add('bg-black');
-    const textColor = Array.from(elements);
-    textColor.forEach(element => {
-        element.classList.add("text-white");
-    });
-    color = "white";
-}
-
-if (themeIsGreen == true) {
-    bodyEl.classList.add('bg-success');
-    color = "warning";
-}
-
-if (themeIsRed == true) {
-    bodyEl.classList.add('bg-danger');
-    color = "black";
-}
-
+// --------------------- CRÉATION DE LA FONCTION BLACK THEME -------------------------------
 function blackTheme() {
-
-    const textColor = Array.from(elements);
-    if (themeIsBlack == true) {
-        return;
-    } else if (themeIsGreen == true) {
+    const textElements = document.getElementsByClassName('changing-color');
+    textColor = "white";
+    backgroundColor = "black";
+    if (themeIsGreen) { // si le thème actuel est le vert, on enlève les attributs
         bodyEl.classList.remove('bg-success');
-        textColor.forEach(element => {
-            element.classList.remove("text-warning");
-        });
-        themeIsGreen = false;
-    } else if (themeIsRed == true) {
+        for (let index = 0; index < textElements.length; index++) {
+            textElements[index].classList.remove(`text-warning`);
+        }
+    } else if (themeIsRed) { // ou s'il est noir, on enlève les attributs
         bodyEl.classList.remove('bg-danger');
-        textColor.forEach(element => {
-            element.classList.remove("text-black");
-        });
-        themeIsRed = false;
+        for (let index = 0; index < textElements.length; index++) {
+            textElements[index].classList.remove(`text-black`);
+        }
     }
-
+    bodyEl.classList.add(`bg-${backgroundColor}`); // puis on rajoute les nouveaux attributs
+    for (let index = 0; index < textElements.length; index++) {
+        textElements[index].classList.add(`text-${textColor}`);
+    }
+    // Et enfin on actualise les variables qui indiquent quelle est la couleur actuelle
     themeIsBlack = true;
-    bodyEl.classList.add('bg-black');
-    textColor.forEach(element => {
-        element.classList.add("text-white");
-    });
-
+    themeIsGreen = false;
+    themeIsRed = false;
 }
 
+
+// ------------------------CRÉATION DE LA FONCTION GREEN THEME -----------------------------
+
+// Même logique que pour la fonction précédente
 function greenTheme() {
+    const textElements = document.getElementsByClassName('changing-color');
 
-    const textColor = Array.from(elements);
-    if (themeIsBlack == true) {
+    textColor = "warning";
+    backgroundColor = "success";
+    if (themeIsBlack) {
         bodyEl.classList.remove('bg-black');
-        textColor.forEach(element => {
-            element.classList.remove("text-white");
-        });
-        themeIsBlack = false;
-    } else if (themeIsGreen == true) {
-        return;
-    } else if (themeIsRed == true) {
+        for (let index = 0; index < textElements.length; index++) {
+            textElements[index].classList.remove(`text-white`);
+        }
+
+    } else if (themeIsRed) {
         bodyEl.classList.remove('bg-danger');
-        textColor.forEach(element => {
-            element.classList.remove("text-black");
-        });
-        themeIsRed = false;
+        for (let index = 0; index < textElements.length; index++) {
+            textElements[index].classList.remove(`text-black`);
+        }
+    }
+    bodyEl.classList.add(`bg-${backgroundColor}`);
+    for (let index = 0; index < textElements.length; index++) {
+        textElements[index].classList.add(`text-${textColor}`);
     }
 
+    themeIsBlack = false;
     themeIsGreen = true;
-    bodyEl.classList.add('bg-success');
-    textColor.forEach(element => {
-        element.classList.add("text-warning");
-    });
-
+    themeIsRed = false;
 }
 
-function redTheme() {
+// ------------------------ CRÉATION DE LA FONCTION RED THEME ----------------------------
 
-    const textColor = Array.from(elements);
-    if (themeIsBlack == true) {
+// Même logique que pour la fonction précédente
+function redTheme() {
+    const textElements = document.getElementsByClassName('changing-color');
+
+    textColor = "black";
+    backgroundColor = "danger";
+    if (themeIsBlack) {
         bodyEl.classList.remove('bg-black');
-        textColor.forEach(element => {
-            element.classList.remove("text-white");
-        });
-        themeIsBlack = false;
-    } else if (themeIsGreen == true) {
+        for (let index = 0; index < textElements.length; index++) {
+            textElements[index].classList.remove(`text-white`);
+        }
+    } else if (themeIsGreen) {
         bodyEl.classList.remove('bg-success');
-        textColor.forEach(element => {
-            element.classList.remove("text-warning");
-        });
-        themeIsGreen = false;
-    } else if (themeIsRed == true) {
-        return;
+        for (let index = 0; index < textElements.length; index++) {
+            textElements[index].classList.remove(`text-warning`);
+        }
+    }
+    bodyEl.classList.add(`bg-${backgroundColor}`);
+    for (let index = 0; index < textElements.length; index++) {
+        textElements[index].classList.add(`text-${textColor}`);
     }
 
+    themeIsBlack = false;
+    themeIsGreen = false;
     themeIsRed = true;
-    bodyEl.classList.add('bg-danger');
-    textColor.forEach(element => {
-        element.classList.add("text-black");
-    });
-
 }
 
-// Piste : Définir des variables pour la couleur de texte et celle du background, et faire des fonctions qui les font évoluer.
+// On crée les appels de fonctions au clic sur les éléments correspondants
+
+const blackThemeEl = document.getElementById("black-theme");
+const redThemeEl = document.getElementById("red-theme");
+const greenThemeEl = document.getElementById("green-theme");
+
+blackThemeEl.addEventListener("click", blackTheme);
+greenThemeEl.addEventListener("click", greenTheme);
+redThemeEl.addEventListener("click", redTheme);

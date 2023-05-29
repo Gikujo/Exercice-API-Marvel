@@ -8,6 +8,7 @@
 
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="menu.css">
+    <script src="theme-changer.js" defer></script>
     <script src="script.js" defer></script>
 
     <link rel="stylesheet" href="title-animation.css">
@@ -19,14 +20,13 @@
         integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"
         defer></script>
 
-    <script src="theme-changer.js" defer></script>
 
     <title>Document</title>
 </head>
 
-<body class="bg-black">
+<body>
 
-    <h1 class="m-2 fs-1 fw-bolder changing-color">Choisis ton personnage</h1>
+    <h1 class="m-2 fs-1 fw-bolder changing-color" id="title">Choisis ton personnage</h1>
 
     <nav>
         <ul>
@@ -39,9 +39,9 @@
             <li class="choix-couleur menu-deroulant">
                 <a href="#">Thème</a>
                 <ul class="sous-menu" id="container">
-                    <li><a href="#" onclick="blackTheme()">Noir</a></li>
-                    <li><a href="#" onclick="redTheme()">Rouge</a></li>
-                    <li><a href="#" onclick="greenTheme()">Vert</a></li>
+                    <li id="black-theme"><a href="#">Noir</a></li>
+                    <li id="red-theme"><a href="#">Rouge</a></li>
+                    <li id="green-theme"><a href="#">Vert</a></li>
                 </ul>
             </li>
         </ul>

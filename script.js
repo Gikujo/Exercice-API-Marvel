@@ -26,7 +26,7 @@ function createHtml(result) {
             i++;
         } else {
             console.log("non");
-            html += `<li value="${i}" class="arial" onclick="updateCharacter(this.value)"><a>${character.name}</a></li>`;
+            html += `<li value="${i}" class="arial" text-black onclick="updateCharacter(this.value)"><a>${character.name}</a></li>`;
             i++;
         }
     });
@@ -34,23 +34,18 @@ function createHtml(result) {
     container.innerHTML += html; // Met à jour le contenu HTML de l'élément de conteneur avec le HTML créé
 }
 
+bodyEl.classList.add(`bg-${backgroundColor}`);
+
+
 // --------------- RAJOUT DU PERSONNAGE SÉLECTIONNÉ, APPELÉ SUR LE "ONCLICK" -------------------
 
 function updateCharacter(selectedIndex) {
-
-    if (themeIsBlack == true) {
-        const elements = document.getElementsByClassName('changing-color');
-        const textColor = Array.from(elements);
-        textColor.forEach(element => {
-            element.classList.add("text-white");
-        });
-    }
     const selectedCharacter = characters[selectedIndex];
 
 
     const html = `
-        <h2 class="changing-color text-white">${selectedCharacter.name}</h2>
-        <p class="my-3 changing-color text-${color}">${selectedCharacter.description}</p>
+        <h2 class="changing-color text-${textColor}">${selectedCharacter.name}</h2>
+        <p class="my-3 changing-color text-${textColor}">${selectedCharacter.description}</p>
         <img class="w-100"src="${selectedCharacter.thumbnail.path}.${selectedCharacter.thumbnail.extension}" alt="${selectedCharacter.name}">
     `;
     activeCharacter.classList.remove("d-none");

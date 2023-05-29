@@ -1,4 +1,4 @@
-/********** Pour que ce script fonctionne correctement,
+/**********Pour que ce script fonctionne correctement,
  penser à rajouter l'attribut "defer" lorsqu'on le cible depuis le head.************/
 
 
